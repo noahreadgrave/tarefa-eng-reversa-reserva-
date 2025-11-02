@@ -1,0 +1,31 @@
+class doador {
+    nome: string;
+    cpf: string;
+    dataNascimento: string;
+    qtDoacaoes: number;
+
+
+
+    //contrutor armazena informaçãoes como: nome, cpf e data de nascimento//
+    constructor(nome: string, cpf: string, dataNascimento: string, qtDoacoes: number) {
+        this.nome = nome;
+        this.cpf = cpf;
+        this.dataNascimento = dataNascimento;
+        this.qtDoacaoes = qtDoacoes;
+    }
+
+
+    //imprime as informaçoes descritas acima//
+    imprimirDetalhes() {
+        console.log("---------------------");
+        console.log(`Nome: ${this.nome}`);
+        console.log(`CPF: ${this.cpf}`);
+        console.log(`Data de Nascimento: ${this.dataNascimento}`);
+        console.log(`Quantidade de doação feita: ${this.qtDoacaoes}`);
+        console.log("---------------------");
+
+
+
+    }
+}
+export default doador;
