@@ -1,0 +1,272 @@
+import promptSync from 'prompt-sync';
+import livro from './livro.ts';
+import compra from './compra.ts';
+import emprestimo from './emprestimo.ts';
+import pessoa from './pessoa.ts';
+import filme from './filme.ts';
+import doacao from './doacao.ts';
+import doador from './doador.ts';
+
+const prompt = promptSync();
+
+// Arrays tipados
+const livros: livro[] = [];
+const compras: compra[] = [];
+const emprestimos: emprestimo[] = [];
+const pessoas: pessoa[] = [];
+const filmes: filme[] = [];
+const doacoes: doacao[] = [];
+const doadores: doador[] = [];
+
+// ---------- FUNÇÕES PRINCIPAIS ---------- //
+
+const adicionarLivro = (): void => {
+    const titulo: string = prompt('Título do livro: ');
+    const autor: string = prompt('Autor do livro: ');
+    const ano: number = Number(prompt('Ano de publicação: '));
+    const paginas: number = Number(prompt('Número de páginas: '));
+    const estoque: number = Number(prompt('Qtd em estoque: '));
+
+    const novoLivro = new livro(titulo, autor, ano, paginas, estoque);
+    livros.push(novoLivro);
+    console.log(' Livro adicionado com sucesso!');
+};
+
+const listarLivros = (): void => {
+    console.log('\n Lista de Livros:');
+    if (livros.length === 0) {
+        console.log('Nenhum livro cadastrado.');
+        return;
+    }
+
+    livros.forEach((livro, index) => {
+        console.log(`\nLivro ${index + 1}:`);
+        livro.imprimirDetalhes();
+    });
+};
+const adicionarFilmes = (): void => {
+    const titulo: string = prompt('Título do filme: ');
+    const diretor: string = prompt('Diretor do filme: ');
+    const elenco: string = prompt('Elenco do filme: ');
+    const dataLancamento: string = prompt('Data de lançameto do filme:  ')
+    const genero: string = prompt('Gênero do filme: ');
+    const estoque: number = Number(prompt('Qtd em estoque: '));
+
+    const novoFilme = new filme(titulo, diretor, elenco, dataLancamento, genero, estoque);
+    filmes.push(novoFilme);
+    console.log(' Filme adicionado com sucesso!');
+};
+
+const listarFilmes = (): void => {
+    console.log('\n Lista de Filmes:');
+    if (filmes.length === 0) {
+        console.log('Nenhum filme cadastrado.');
+        return;
+    }
+
+    filmes.forEach((filme, index) => {
+        console.log(`\nFilme ${index + 1}:`);
+        filme.imprimirDetalhes();
+    });
+}
+
+
+const adicionarPessoa = (): void => {
+    const nome: string = prompt('Nome da pessoa: ');
+    const cpf: string = prompt('CPF da pessoa: ');
+    const dataNascimento: string = prompt('Data de nascimento da pessoa: ');
+
+    const nPessoa = new pessoa(nome, cpf, dataNascimento);
+    pessoas.push(nPessoa);
+    console.log(' Pessoa adicionada com sucesso!');
+};
+
+const listarPessoas = (): void => {
+    console.log('\n Lista de Pessoas:');
+    if (pessoas.length === 0) {
+        console.log('Nenhuma pessoa cadastrada.');
+        return;
+    }
+
+    pessoas.forEach((pessoa, index) => {
+        console.log(`\nPessoa ${index + 1}:`);
+        pessoa.imprimirDetalhes();
+    });
+};
+
+const adicionarDoador = (): void => {
+    const nome: string = prompt('Nome do doador: ');
+    const cpf: string = prompt('CPF do doador: ');
+    const dataNascimento: string = prompt('Data de nascimento do doador: ');
+    const qtDoacoes: number = Number (prompt('Quantidade de doações:'));
+   
+    const nDoador = new doador(nome, cpf, dataNascimento, qtDoacoes);
+    doadores.push(nDoador);
+    console.log(' Doador adicionado com sucesso!');
+};
+
+const listarDoador = (): void => {
+    console.log('\n Lista de Doadores:');
+    if (doadores.length === 0) {
+        console.log('Nenhum doador cadastrado.');
+        return;
+    }
+
+    doadores.forEach((doador, index) => {
+        console.log(`\nPessoa ${index + 1}:`);
+        doador.imprimirDetalhes();
+    });
+}
+
+const adicionarDoacao = (): void => {
+    const obraDoada: string = prompt('Obra a ser doada: ');
+    const dataDoacao: string = prompt('Data da doação: ');
+    const doador: string = prompt('Ano de publicação: ');
+    
+
+    const novaDoacao = new doacao(obraDoada, dataDoacao, doador);
+    doacoes.push(novaDoacao);
+    console.log(' Doação adicionado com sucesso!');
+};
+
+const listarDoacao = (): void => {
+    console.log('\n Lista de doações:');
+    if (doacoes.length === 0) {
+        console.log('Nenhum doação cadastrada.');
+        return;
+    }
+
+    doacoes.forEach((doacao, index) => {
+        console.log(`\n\Doação ${index + 1}:`);
+        doacao.imprimirDetalhes();
+    });
+};
+const adicionarCompra = (): void => {
+    if (livros.length === 0) {
+        console.log(' Nenhum livro disponível para compra.');
+        return;
+    }
+
+    listarLivros();
+    const livroIndex = Number(prompt('Selecione o número do livro para compra: ')) - 1;
+    const preco = Number(prompt('Preço total da compra: '));
+    const vendedor = prompt('Nome do vendedor: ');
+    const data_venda = Number(prompt('Data da venda: '));
+    const qtd = Number(prompt('Quantidade comprada: '));
+
+    const nCompra = new compra(livros[livroIndex], preco, vendedor, data_venda, qtd);
+    compras.push(nCompra);
+    console.log(' Compra adicionada com sucesso!');
+};
+
+const listarCompras = (): void => {
+    console.log('\n Lista de Compras:');
+    if (compras.length === 0) {
+        console.log('Nenhuma compra registrada.');
+        return;
+    }
+
+    compras.forEach((compra, index) => {
+        console.log(`\nCompra ${index + 1}:`);
+        compra.imprimirDetalhe();
+    });
+};
+
+const adicionarEmprestimo = (): void => {
+    if (livros.length === 0 || pessoas.length === 0) {
+        console.log(' É necessário ter livros e pessoas cadastradas para emprestar.');
+        return;
+    }
+    
+   
+    
+    listarLivros();
+    const livroIndex = Number(prompt('Selecione o número do livro para empréstimo: ')) - 1;
+    const doacaoIndex = Number(prompt('selecione o número do livro doado para empréstimo: ')) - 1;
+    listarPessoas();
+    const pessoaIndex = Number(prompt('Selecione o número da pessoa: ')) - 1;
+    const doadorIndex = Number (prompt('Selecione o número da pessoa: ')) - 1;
+    const diasEmprestimo = Number(prompt('Número de dias do empréstimo: '));
+
+    const nEmprestimo = new emprestimo(livros[livroIndex], doacoes[doacaoIndex], pessoas[pessoaIndex], diasEmprestimo);
+    emprestimos.push(nEmprestimo);
+    console.log(' Empréstimo adicionado com sucesso!');
+};
+
+const listarEmprestimos = (): void => {
+    console.log('\n Lista de Empréstimos:');
+    if (emprestimos.length === 0) {
+        console.log('Nenhum empréstimo registrado.');
+        return;
+    }
+
+    emprestimos.forEach((emprestimo, index) => {
+        console.log(`\nEmpréstimo ${index + 1}:`);
+        emprestimo.imprimirDetalhes();
+    });
+};
+
+const devolverLivro = (): void => {
+    if (emprestimos.length === 0) {
+        console.log(' Nenhum empréstimo para devolver.');
+        return;
+    }
+
+    listarEmprestimos();
+    const emprestimoIndex = Number(prompt('Selecione o número do empréstimo para devolução: ')) - 1;
+    const demoraDias = Number(prompt('Número de dias que demorou para devolver: '));
+
+    const emprestimo = emprestimos[emprestimoIndex];
+    console.log(` Multa a ser paga: R$${emprestimo.calcularMulta(demoraDias).toFixed(2)}`);
+};
+
+// ---------- MENU PRINCIPAL ---------- //
+
+const menu = (): void => {
+    console.log('\n===== MENU =====');
+    console.log('1. Adicionar Livro');
+    console.log('2. Listar Livros');
+    console.log('3. Adicionar Filmes');
+    console.log('4. Listar Filmes');
+    console.log('5. Adicionar Pessoa');
+    console.log('6. Listar Pessoas');
+    console.log('7. Adicionar Doador');
+    console.log('8. Listar Doador');
+    console.log('9. Adicionar Doação');
+    console.log('10. Listar Doação');
+    console.log('11. Adicionar Compra');
+    console.log('12. Listar Compras');
+    console.log('13. Adicionar Empréstimo');
+    console.log('14. Listar Empréstimos');
+    console.log('15. Devolver Livro');
+    console.log('0. Sair');
+
+    const escolha = prompt('Escolha uma opção: ');
+
+    switch (escolha) {
+        case '1': adicionarLivro(); break;
+        case '2': listarLivros(); break;
+        case '3': adicionarFilmes(); break;
+        case '4': listarFilmes(); break;
+        case '5': adicionarPessoa(); break;
+        case '6': listarPessoas(); break;
+        case '7': adicionarDoador(); break;
+        case '8': listarDoador(); break;
+        case '9': adicionarDoacao(); break;
+        case '10': listarDoacao(); break;
+        case '11': adicionarCompra(); break;
+        case '12': listarCompras(); break;
+        case '13': adicionarEmprestimo(); break;
+        case '14': listarEmprestimos(); break;
+        case '15': devolverLivro(); break;
+        case '0': console.log(' Saindo...'); process.exit(0);
+        default: console.log(' Opção inválida!');
+    }
+};
+
+// ---------- LOOP PRINCIPAL ---------- //
+while (true) {
+    menu();
+    const continuar = prompt('Deseja sair do sistema? (s/n): ');
+    if (continuar.toLowerCase() === 's') break;
+}
