@@ -1,0 +1,23 @@
+class doacao {
+    obraDoada: string;
+    dataDoacao: string;
+    doador: string;
+
+    constructor(obraDoada: string, dataDoacao: string,doador: string ) {
+       
+        this.obraDoada = obraDoada;
+         this.dataDoacao = dataDoacao;
+        this.doador = doador;
+
+    }
+
+    imprimirDetalhes() {
+
+        console.log("---------------------");
+        console.log(`Obra doada: ${this.obraDoada} `);
+        
+        console.log(`Doador: ${this.doador} `);
+        console.log("---------------------");
+    }
+}
+export default doacao;
