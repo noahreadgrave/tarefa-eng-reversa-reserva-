@@ -1,0 +1,36 @@
+class filme {
+    
+    titulo: string
+    diretor: String;
+    elenco: String;
+    dataLancamento: String;
+    genero: String;
+    qtEstoque: number;
+    
+    constructor(titulo: string, diretor: string, elenco: string, dataLancamento: string, genero: string, qtEstoque: number) {
+        
+        this.titulo = titulo
+        this.diretor = diretor;
+        this.elenco = elenco;
+        this.dataLancamento = dataLancamento;
+        this.genero = genero;
+        this.qtEstoque = qtEstoque
+        
+
+    }
+
+    imprimirDetalhes() {
+        
+        console.log("---------------------");
+        console.log(`Título: ${this.titulo}`);
+        console.log(`Diretor: ${this.diretor}`);
+        console.log(`Elenco: ${this.elenco}`);
+        console.log(`Data de lançamento: ${this.dataLancamento}`);
+        console.log(`Gênero: ${this.genero}`);
+        console.log(`quantidade no estoque: ${this.qtEstoque}`);
+        console.log("---------------------");
+
+
+    }
+}
+export default filme;
