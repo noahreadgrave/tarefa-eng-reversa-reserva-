@@ -1,0 +1,27 @@
+class pessoa {
+    nome: string;
+    cpf: string;
+    dataNascimento: string;
+
+
+
+    //contrutor armazena informaçãoes como: nome, cpf e data de nascimento//
+    constructor(nome: string, cpf: string, dataNascimento: string) {
+        this.nome = nome;
+        this.cpf = cpf;
+        this.dataNascimento = dataNascimento;
+    }
+
+
+    //imprime as informaçoes descritas acima//
+    imprimirDetalhes() {
+        console.log("---------------------");
+        console.log(`Nome: ${this.nome}`);
+        console.log(`CPF: ${this.cpf}`);
+        console.log(`Data de Nascimento: ${this.dataNascimento}`);
+        console.log("---------------------");
+
+
+
+    }
+}
