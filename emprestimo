@@ -1,0 +1,50 @@
+interface Livro {
+    titulo: string;
+    numeroPaginas: number;
+    qtEstoque: number;
+}
+
+interface Pessoa {
+    nome: string;
+}
+
+
+class emprestimo {
+    livro: Livro;
+    pessoa: Pessoa;
+    dias_emprestimo: number;
+   
+    //O construtor comporta informações como: livro, pessoa, dias de empréstimo e
+//diminui a quantidade no estoque assim que o empréstimo é criado.
+
+    constructor(livro: Livro, pessoa: Pessoa, dias_emprestimo: number) {
+        this.livro = livro;
+        this.pessoa = pessoa;
+        this.dias_emprestimo = dias_emprestimo;
+
+        //reduz o estoque ao criar o empréstimo.//
+        this.livro.qtEstoque -= 1;
+    }
+
+    // Imprime os detalhes do empréstimo//
+    imprimirDetalhes(): void {
+        console.log("---------------------");
+        console.log(`Livro: ${this.livro.titulo}`);
+        console.log(`Pessoa: ${this.pessoa.nome}`);
+        console.log(`Dias de Empréstimo: ${this.dias_emprestimo}`);
+        console.log("---------------------");
+    }
+
+    // Calcula a multa baseada na demora da entrega e no número de páginas//
+    calcularMulta(demoraDias: number): number {
+        if (demoraDias <= this.dias_emprestimo) {
+            return 0.0;
+        }
+        return (
+            (demoraDias - this.dias_emprestimo) *
+            Math.ceil(this.livro.numeroPaginas / 100) *
+            2.0
+        );
+    }
+}
+export default emprestimo;
